@@ -33,17 +33,14 @@ public class ProfDAO {
 	 public boolean authenticateProf(String email, String password) {
 		 Prof prof = getProfByEmail(email);
 	     if (prof == null) {
-	    	 return false; // User not found
+	    	 return false;
 	 }
-	     return prof.getPassword().equals(password); // Simple password check
+	     return prof.getPassword().equals(password); 
 	 }
 	 public Prof addProf(int cin,String nom,String prenom,String gener, String email,String password) {
-	        // Check if email already exists
 	        if (getProfByEmail(email) != null || getProfById(cin) != null) {
 	            throw new IllegalArgumentException("Email is already registered");
 	        }
-
-	        // Create and save a new user
 	        Prof newProf = new Prof();
 	        newProf.setCin(cin);
 	        newProf.setNom(nom);
@@ -51,7 +48,6 @@ public class ProfDAO {
 	        newProf.setGener(gener);
 	        newProf.setEmail(email);
 	        newProf.setPassword(password);
-	        
 	        return profrepository.save(newProf);
 	    }
 	 public List<Prof> getAllProfessors() {

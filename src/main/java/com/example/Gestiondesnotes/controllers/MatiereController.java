@@ -28,15 +28,20 @@ public class MatiereController {
         List<Matiere> matiere = matiereDAO.getAllProfessors();
         return ResponseEntity.ok(matiere);
     }
+	@GetMapping("/matierebyclasse")
+	public ResponseEntity<List<String>> getMatiereByClasse(@RequestParam String classe) {
+		List<String> matieres = matiereDAO.getMatiereByClasse(classe);
+	        return ResponseEntity.ok(matieres);
+	    }
 	 @PostMapping("/addmatiere")
 	 public ResponseEntity<String> addMatiere(
-	            @RequestParam String matiere,@RequestParam String classe,@RequestParam double cof) {
-	        try {
-	            matiereDAO.addMatiere(matiere,classe,cof);
-	            return ResponseEntity.ok("Matier added!");
-	        } catch (IllegalArgumentException e) {
-	            return ResponseEntity.badRequest().body(e.getMessage());}
-	        }
+	        @RequestParam String matiere,@RequestParam String classe,@RequestParam double cof) {
+	    try {
+	        matiereDAO.addMatiere(matiere,classe,cof);
+	        return ResponseEntity.ok("Matier added!");
+	    } catch (IllegalArgumentException e) {
+	        return ResponseEntity.badRequest().body(e.getMessage());}
+	    }
 	@PutMapping("/updatematiere/{idmatiere}")
 	public ResponseEntity<String> updateMatiere(@PathVariable int idmatiere, @RequestBody Matiere updateMatiere) {
 	    boolean updated = matiereDAO.updateMatiere(idmatiere, updateMatiere);
@@ -54,9 +59,5 @@ public class MatiereController {
             return ResponseEntity.status(404).body("Matiere with id " + idmatiere + " not found");
         }
     }
-	  @GetMapping("/matierebyclasse")
-	    public ResponseEntity<List<String>> getMatiereByClasse(@RequestParam String classe) {
-	        List<String> matieres = matiereDAO.getMatiereByClasse(classe);
-	        return ResponseEntity.ok(matieres);
-	    }
+	
 }

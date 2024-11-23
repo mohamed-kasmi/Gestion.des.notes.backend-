@@ -24,11 +24,9 @@ public class MatiereDAO {
         return matiereRepository.findByMatiereAndClasse(matiere,classe);
     }
 	public Matiere addMatiere(String matiere,String classe,double cof) {
-        // Check if email already exists
         if (getmatiername(matiere,classe) != null) {
             throw new IllegalArgumentException("Matiere is already exist");
         }
-        // Create and save a new user
         Matiere newMatiere = new Matiere();
         newMatiere.setMatiere(matiere);
         newMatiere.setClasse(classe);
@@ -39,27 +37,20 @@ public class MatiereDAO {
 	    Optional<Matiere> optionalMatiere = matiereRepository.findById(idmatiere);
 
 	    if (optionalMatiere.isPresent()) {
-	        // Get the existing Etudiant
 	        Matiere existingMatiere = optionalMatiere.get();
-
-	        // Update fields
 	        existingMatiere.setMatiere(updateemat.getMatiere());
 	        existingMatiere.setClasse(updateemat.getClasse());
 	        existingMatiere.setCofi(updateemat.getCofi());
-	        // Save updated entity
 	        matiereRepository.save(existingMatiere);
-
-	        // Return true to indicate successful update
 	        return true;
 	    }
-	    // Return false if cin does not exist
 	    return false;
 	}
-	 public List<Matiere> getAllProfessors() {
-	        return matiereRepository.findAll();
-	    }
-	  public List<String> getMatiereByClasse(String classe) {
-	        return matiereRepository.findMatiereByClasse(classe);
-	    }
+ public List<Matiere> getAllProfessors() {
+        return matiereRepository.findAll();
+    }
+ public List<String> getMatiereByClasse(String classe) {
+        return matiereRepository.findMatiereByClasse(classe);
+    }
 	
 }

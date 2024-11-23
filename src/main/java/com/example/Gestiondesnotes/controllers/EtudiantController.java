@@ -23,6 +23,11 @@ import com.example.Gestiondesnotes.services.EtudiantDAO;
 public class EtudiantController {
 	@Autowired
 	private EtudiantDAO etudiantDAO;
+	@GetMapping("/getalletud")
+	public ResponseEntity<List<Etudiant>> getAllEtudiant() {
+		List<Etudiant> etudiant = etudiantDAO.getAllEtudiant();
+	    return ResponseEntity.ok(etudiant);
+		}
 	@PutMapping("/signup/{cin}")
 	public ResponseEntity<String> updateEtudiant(@PathVariable int cin, @RequestBody Etudiant updatedEtudiant) {
 	    boolean updated = etudiantDAO.updateEtud(cin, updatedEtudiant);
@@ -59,11 +64,7 @@ public class EtudiantController {
 	            return ResponseEntity.status(404).body("Student with CIN " + cinetud + " not found");
 	        }
 	    }
-	 @GetMapping("/getalletud")
-	    public ResponseEntity<List<Etudiant>> getAllEtudiant() {
-	        List<Etudiant> etudiant = etudiantDAO.getAllEtudiant();
-	        return ResponseEntity.ok(etudiant);
-	    }
+	
 	 
 
 }

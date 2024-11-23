@@ -24,25 +24,16 @@ public class EtudiantDAO {
 	 }
 	public boolean updateEtud(int cin,Etudiant updateetud) {
 	    Optional<Etudiant> optionalEtudiant = etudiantRepository.findById(cin);
-
 	    if (optionalEtudiant.isPresent()) {
-	        // Get the existing Etudiant
 	        Etudiant existingEtudiant = optionalEtudiant.get();
-
-	        // Update fields
 	        existingEtudiant.setNom(updateetud.getNom());
 	        existingEtudiant.setPrenom(updateetud.getPrenom());
 	        existingEtudiant.setGenre(updateetud.getGenre());
 	        existingEtudiant.setEmail(updateetud.getEmail());
 	        existingEtudiant.setPassword(updateetud.getPassword()); 
-
-	        // Save updated entity
 	        etudiantRepository.save(existingEtudiant);
-
-	        // Return true to indicate successful update
 	        return true;
 	    }
-	    // Return false if cin does not exist
 	    return false;
 	}
 
@@ -56,16 +47,14 @@ public class EtudiantDAO {
 	 public boolean authenticateEtud(String email, String password) {
 		 Etudiant etudiant = getEtudByEmail(email);
 	     if (etudiant == null) {
-	    	 return false; // User not found
+	    	 return false; 
 	     }
-	     return etudiant.getPassword().equals(password); // Simple password check
+	     return etudiant.getPassword().equals(password); 
 	 }
 	 public Etudiant addEtudbyadmin(int cin,String classe) {
-	        // Check if email already exists
 	        if (getEtudById(cin) != null) {
 	            throw new IllegalArgumentException("CIN is already registered");
 	        }
-	        // Create and save a new user
 	        Etudiant newEtud = new Etudiant();
 	        newEtud.setCin(cin);
 	        newEtud.setClasse(classe);
