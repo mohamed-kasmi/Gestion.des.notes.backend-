@@ -8,11 +8,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Matiere implements Serializable{
+public class Matiere implements Serializable{//classe = Specialiter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String matiere;
+	private String classe;
 	private double cofi;
 	public Matiere() {
 		
@@ -34,6 +35,12 @@ public class Matiere implements Serializable{
 	}
 	public void setCofi(double cofi) {
 		this.cofi = cofi;
+	}
+	public String getClasse() {
+		return classe;
+	}
+	public void setClasse(String classe) {
+		this.classe = classe;
 	}
 	
 	

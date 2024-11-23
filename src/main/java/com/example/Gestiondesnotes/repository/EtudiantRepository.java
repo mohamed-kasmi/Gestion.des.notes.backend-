@@ -8,5 +8,5 @@ import com.example.Gestiondesnotes.entity.Etudiant;
 
 @Repository
 public interface EtudiantRepository extends JpaRepository<Etudiant, Integer>{
-
+	Etudiant findByEmail(String email);
 }
