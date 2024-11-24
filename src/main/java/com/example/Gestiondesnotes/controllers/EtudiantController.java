@@ -28,6 +28,16 @@ public class EtudiantController {
 		List<Etudiant> etudiant = etudiantDAO.getAllEtudiant();
 	    return ResponseEntity.ok(etudiant);
 		}
+	 @GetMapping("/cin-by-email")
+	    public ResponseEntity<?> getCinprofByEmail(@RequestParam String email) {
+	        Integer cinprof = etudiantDAO.getCinetudByEmail(email);
+
+	        if (cinprof != null) {
+	            return ResponseEntity.ok(cinprof);
+	        } else {
+	            return ResponseEntity.status(404).body("No Etudiant found with email: " + email);
+	        }
+	    }
 	@PutMapping("/signup/{cin}")
 	public ResponseEntity<String> updateEtudiant(@PathVariable int cin, @RequestBody Etudiant updatedEtudiant) {
 	    boolean updated = etudiantDAO.updateEtud(cin, updatedEtudiant);

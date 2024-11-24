@@ -27,6 +27,9 @@ public class ProfDAO {
 	public Prof getProfByEmail(String email) {
         return profrepository.findByEmail(email);
     }
+	 public Integer getCinprofByEmail(String email) {
+	        return profrepository.findCinprofByEmail(email);
+	    }
 	public Prof getProfById(int cin) {
 		return profrepository.findById(cin).orElse(null);
 	}

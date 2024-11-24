@@ -51,6 +51,9 @@ public class EtudiantDAO {
 	     }
 	     return etudiant.getPassword().equals(password); 
 	 }
+	 public Integer getCinetudByEmail(String email) {
+	        return etudiantRepository.findCinetudByEmail(email);
+	    }
 	 public Etudiant addEtudbyadmin(int cin,String classe) {
 	        if (getEtudById(cin) != null) {
 	            throw new IllegalArgumentException("CIN is already registered");

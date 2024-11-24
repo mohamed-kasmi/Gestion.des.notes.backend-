@@ -46,6 +46,16 @@ public class ProfController {
 	            return ResponseEntity.status(404).body("Professor with email " + email + " does not exist.");
 	        }
 	    }
+	 @GetMapping("/cin-by-email")
+	    public ResponseEntity<?> getCinprofByEmail(@RequestParam String email) {
+	        Integer cinprof = profDAO.getCinprofByEmail(email);
+
+	        if (cinprof != null) {
+	            return ResponseEntity.ok(cinprof);
+	        } else {
+	            return ResponseEntity.status(404).body("No professor found with email: " + email);
+	        }
+	    }
 	 @PostMapping("/signup")
 	    public ResponseEntity<String> signUpProf(
 	            @RequestParam int cin,
