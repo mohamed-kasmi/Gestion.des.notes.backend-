@@ -34,6 +34,13 @@ public class NoteController {
 		List<Notes> notes = noteDAO.getAllbycinprof(cinprof);
 	    return ResponseEntity.ok(notes);
 	}
+	@GetMapping("/searchmatiereedtud")
+    public ResponseEntity<List<Notes>> findNotesByCinetudAndMatiere(
+            @RequestParam int cinetud,
+            @RequestParam String matiere) {
+        List<Notes> notes = noteDAO.findAllByCinetudAndMatiereLike(cinetud, matiere);
+        return ResponseEntity.ok(notes);
+    }
 	@PostMapping("/addnotes")
     public ResponseEntity<String> addnotes(
             @RequestParam int cinetud,
@@ -50,7 +57,7 @@ public class NoteController {
         }
     }
 	@GetMapping("/shearchaddnote")
-	public ResponseEntity<List<Notes>> getallnotesbycinetudandprof(@RequestParam int cinetud,int cinprof) {
+	public ResponseEntity<List<Notes>> getallnotesbycinetudandprof(@RequestParam int cinetud,@RequestParam int cinprof) {
 		List<Notes> notes = noteDAO.getallnotesbycinetudandprof(cinetud,cinprof);
 	    return ResponseEntity.ok(notes);
 	}

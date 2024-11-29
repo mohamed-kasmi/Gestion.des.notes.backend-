@@ -25,6 +25,9 @@ public class NoteDAO {
 	 public List<Notes> getallnotesbycinetudandprof(int cinetud,int cinprof){
 	    	return noteRepository.findAllByCinetudAndCinprof(cinetud, cinprof);
 	 	}
+	 public List<Notes> findAllByCinetudAndMatiereLike(int cinetud, String matiere) {
+	        return noteRepository.findAllByCinetudAndMatiereLike(cinetud, matiere);
+	    }
 	 public Notes addnote(int cinetud,int cinprof,String matiere,String classe,String type,double note) {
 		 if (noteRepository.findByCinetudAndMatiereAndType(cinetud, matiere, type) != null) {
 	            throw new IllegalArgumentException("Note is already registered");
@@ -42,10 +45,6 @@ public class NoteDAO {
 	    Optional<Notes> optionalNotes = noteRepository.findById(id);
 	    if (optionalNotes.isPresent()) {
 	        Notes existingNote = optionalNotes.get();
-	        existingNote.setCinetud(updatenote.getCinetud());
-	        existingNote.setCinprof(updatenote.getCinprof());
-	        existingNote.setMatiere(updatenote.getMatiere());
-	        existingNote.setClasse(updatenote.getClasse());
 	        existingNote.setType(updatenote.getType()); 
 	        existingNote.setNote(updatenote.getNote()); 
 	        noteRepository.save(existingNote);

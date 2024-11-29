@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Gestiondesnotes.entity.Etudiant;
+import com.example.Gestiondesnotes.repository.EtudiantRepository;
 import com.example.Gestiondesnotes.services.EtudiantDAO;
 
 @RestController
@@ -23,6 +24,7 @@ import com.example.Gestiondesnotes.services.EtudiantDAO;
 public class EtudiantController {
 	@Autowired
 	private EtudiantDAO etudiantDAO;
+	private EtudiantRepository etudiantRepository;
 	@GetMapping("/getalletud")
 	public ResponseEntity<List<Etudiant>> getAllEtudiant() {
 		List<Etudiant> etudiant = etudiantDAO.getAllEtudiant();
@@ -39,8 +41,9 @@ public class EtudiantController {
 	        }
 	    }
 	@PutMapping("/signup/{cin}")
-	public ResponseEntity<String> updateEtudiant(@PathVariable int cin, @RequestBody Etudiant updatedEtudiant) {
-	    boolean updated = etudiantDAO.updateEtud(cin, updatedEtudiant);
+	public ResponseEntity<String> updateEtudiant(@PathVariable int cin,@RequestBody Etudiant updatedEtudiant) {
+		
+		boolean updated = etudiantDAO.updateEtud(cin, updatedEtudiant);
 	    if (updated) {
 	        return ResponseEntity.ok("Etudiant updated successfully.");
 	    } else {
